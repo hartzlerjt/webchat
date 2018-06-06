@@ -79,4 +79,7 @@ func regClient(w http.ResponseWriter, req *http.Request) {
 		io.WriteString(w, "Only POST allowed here\n")
 	}
 	//fmt.Println(req.UserAgent())
+
+	//user := req.FormValue("user")
+	//pass := req.FormValue("pass")
 }
