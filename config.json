@@ -1,0 +1,7 @@
+{ 
+    "server": true,
+    "user": "none",
+    "password": "none",
+    "host": "localhost",
+    "port": 8080
+}
