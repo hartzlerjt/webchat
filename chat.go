@@ -73,13 +73,56 @@ func runClient(c *config) {
 }
 
 func regClient(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, "You are Registering!\n")
+	//io.WriteString(w, "You are Registering!\n")
 	fmt.Println(req.Method)
-	if req.Method != "POST" {
-		io.WriteString(w, "Only POST allowed here\n")
-	}
+	/*
+		if req.Method != "POST" {
+			io.WriteString(w, "Only POST allowed here\n")
+		}
+	*/
 	//fmt.Println(req.UserAgent())
 
-	//user := req.FormValue("user")
-	//pass := req.FormValue("pass")
+	user := req.FormValue("user")
+	pass := req.FormValue("pass")
+	remem := req.FormValue("remember")
+
+	if user == "" {
+		//io.WriteString(w, "user is an empty string\n")
+		f, err := os.Open("form.html")
+		if err != nil {
+			panic(err)
+		}
+		defer f.Close()
+
+		bs := make([]byte, 1000)
+		n, err := f.Read(bs)
+
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("%v\n", n)
+		//fmt.Println(string(bs))
+		io.WriteString(w, string(bs))
+	}
+
+	if pass == "" {
+		fmt.Println("Password Empty")
+	}
+
+	if remem == "" {
+		fmt.Println("Remember Empty")
+	}
+
+	fmt.Println("Leaving regClient()")
+	fmt.Printf("user:%V\tpass:%V\tremem:%V\n", user, pass, remem)
+
+}
+
+func loadFile(fileName string) *os.File {
+	f, err := os.Open(fileName)
+	if err != nil {
+		panic(err)
+	}
+
+	return f
 }
